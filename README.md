@@ -1,7 +1,7 @@
 # Lane
 
 **Name:** Miguel Moncada-Larrotiz
-**UMID:** REPLACE_WITH_YOUR_UMID
+**UMID:** 5622 6699
 
 Lane is a personal semester planner. It keeps courses, assignment deadlines, and weekly study blocks in one saved plan, then tells you what to do next. The desk (web), the phone, and the terminal all read and write that same plan.
 
