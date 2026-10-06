@@ -1,7 +1,7 @@
 """Phone UI for Lane: see today, check a task off, capture the next one."""
 
 import from "@jac/mobui" {
-    View, Text, Pressable, TextInput, ScrollView, StyleSheet
+    View, Text, Pressable, TextInput, ScrollView, StyleSheet, Platform
 }
 import from core.planner {
     snapshot,
@@ -13,6 +13,22 @@ import from core.planner {
 }
 
 glob styles = StyleSheet.create({
+    stage: {
+        "flex": 1,
+        "height": "100vh",
+        "backgroundColor": "#2a241c",
+        "alignItems": "center"
+    },
+    phone: {
+        "flex": 1,
+        "width": "100%",
+        "maxWidth": 420,
+        "height": "100vh",
+        "backgroundColor": "#1c1915",
+        "borderLeftWidth": 1,
+        "borderRightWidth": 1,
+        "borderColor": "#4a4036"
+    },
     screen: {"flex": 1, "backgroundColor": "#1c1915"},
     body: {"padding": 20, "paddingBottom": 48, "gap": 14},
     mark: {"color": "#f3ecdf", "fontSize": 42, "fontWeight": "700"},
@@ -161,7 +177,8 @@ def:pub app -> JsxElement {
         await reload();
     }
 
-    <ScrollView style={styles.screen} contentContainerStyle={styles.body}>
+    <View style={styles.stage if Platform.OS == "web" else styles.screen}>
+    <ScrollView style={styles.phone if Platform.OS == "web" else styles.screen} contentContainerStyle={styles.body}>
         <Text style={styles.mark}>Lane</Text>
         <Text style={styles.date}>{today_label if loaded else "Loading the plan..."}</Text>
         {(<View style={styles.banner}><Text style={styles.banner_text}>{suggestion}</Text></View>) if suggestion != "" else None}
@@ -239,4 +256,5 @@ def:pub app -> JsxElement {
             ]}
         </View>) if loaded and screen == "courses" else None}
     </ScrollView>
+    </View>
 }
